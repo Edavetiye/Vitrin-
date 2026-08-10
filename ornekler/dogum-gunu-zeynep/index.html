@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Prensesimiz Zeynep 4 Yaşında</title>
+<style>
+  :root{ --bg-top:#c8b3dd; --bg-bottom:#f3d3dd; }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;width:100%;
+    background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+    overflow:hidden;-webkit-tap-highlight-color:transparent;font-family:"Segoe UI",Roboto,system-ui,sans-serif;}
+  #app{position:fixed;inset:0;overflow:hidden;}
+  .fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+
+  #cover{z-index:2;cursor:pointer;will-change:transform,opacity;transition:opacity .32s ease;animation:breathe 3.2s ease-in-out infinite;}
+  #cover.opening{animation:none;transition:opacity .32s ease, transform .5s ease;transform:scale(1.045);}
+  @keyframes breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.012);}}
+
+  #vid{z-index:3;opacity:0;transition:opacity .35s ease;pointer-events:none;background:transparent;}
+
+  #flash{z-index:4;position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .55s ease;
+    background:radial-gradient(circle at 50% 46%, rgba(255,244,214,.92) 0%, rgba(255,228,176,.55) 38%, rgba(255,214,150,0) 70%);}
+
+  #invite{z-index:5;position:absolute;inset:0;opacity:0;transition:opacity .85s ease;
+    display:flex;align-items:center;justify-content:center;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;pointer-events:none;}
+  #invite.active{pointer-events:auto;}
+
+  /* Animasyonlu davetiye videosu çerçeveyi belirler; overlay'ler videoyla aynı koordinat sisteminde */
+  #frame{position:relative;width:100%;max-width:460px;margin:auto;container-type:inline-size;}
+  #ivid{display:block;width:100%;height:auto;aspect-ratio:720/1280;object-fit:cover;background:var(--bg-bottom);}
+
+  /* Görünmez, çalışan buton alanları (animasyondaki butonların üzerinde) */
+  .hotspot{position:absolute;display:block;background:transparent;border:0;cursor:pointer;border-radius:100px;
+    -webkit-tap-highlight-color:transparent;transition:transform .12s ease, filter .12s ease;}
+  .hotspot:active{transform:scale(.97);filter:brightness(1.06);}
+  /* Konum + Katılım butonları (ölçülen konumlar) */
+  #btnMap{  left:17.5%; top:69.3%; width:27.0%; height:5.8%; }
+  #btnRsvp{ left:52.5%; top:69.3%; width:33.5%; height:5.8%; }
+
+  /* Canlı geri sayım — konumu ekran görüntüsüne göre ayarlanacak.
+     İnce ayar: aşağıdaki 4 kutunun left/top ve gerekiyorsa .cd width/height/font-size. */
+  .cd{position:absolute;transform:translate(-50%,-50%);
+    width:11%;height:3.7%;display:flex;align-items:center;justify-content:center;border-radius:16%;
+    background:linear-gradient(180deg,#f6d6cf 0%,#f2c3ba 100%);
+    color:#c8506d;font-family:Georgia,"Times New Roman",serif;font-weight:700;
+    font-size:6cqw;line-height:1;letter-spacing:.5px;text-shadow:0 1px 0 rgba(198,150,84,.55);overflow:hidden;}
+  /* "Kalan Süre" başlığı — sayacın hemen üstünde */
+  #cdLabel{position:absolute;left:51.5%;top:79.6%;transform:translate(-50%,-50%);
+    color:#c8506d;font-family:Georgia,"Times New Roman",serif;font-weight:700;
+    font-size:4.2cqw;letter-spacing:1px;white-space:nowrap;
+    text-shadow:0 1px 0 rgba(198,150,84,.5);}
+  #cdGun{ left:29.8%; top:84.0%; }
+  #cdSaat{ left:44.3%; top:84.0%; }
+  #cdDak{ left:58.7%; top:84.0%; }
+  #cdSan{ left:73.2%; top:84.0%; }
+</style>
+</head>
+<body>
+  <div id="app">
+    <img id="cover" class="fill" src="assets/kapak.png" alt="Açmak için dokun">
+    <video id="vid" class="fill" muted playsinline webkit-playsinline preload="auto"></video>
+    <div id="flash"></div>
+
+    <section id="invite">
+      <div id="frame">
+        <video id="ivid" loop muted playsinline webkit-playsinline preload="auto"></video>
+        <a id="btnMap"  class="hotspot" href="#" target="_blank" rel="noopener" aria-label="Konumu Gör"></a>
+        <a id="btnRsvp" class="hotspot" href="#" target="_blank" rel="noopener" aria-label="Katılım Bildir"></a>
+        <div id="cdLabel">Kalan Süre</div>
+        <div id="cdGun" class="cd">--</div>
+        <div id="cdSaat" class="cd">--</div>
+        <div id="cdDak" class="cd">--</div>
+        <div id="cdSan" class="cd">--</div>
+      </div>
+    </section>
+  </div>
+
+
+<script>
+/* ===================== AYARLAR ===================== */
+const CONFIG = {
+  eventDate: "2026-08-30T14:00:00+03:00",
+  countdownLabel: "Kalan Süre",                    // "Kalan Zaman" da yazabilirsiniz
+  mapsUrl:  "https://www.google.com/maps/search/?api=1&query=Masal%20Bah%C3%A7esi%20K%C4%B1r%20Bah%C3%A7esi",
+  rsvpUrl:  "https://wa.me/905555555555?text=" +
+            encodeURIComponent("Prensesimiz Zeynep'in 4. yaş davetine katılmak istiyorum \uD83D\uDC96")
+};
+/* =================================================== */
+
+const cover=document.getElementById('cover'), vid=document.getElementById('vid'),
+      flash=document.getElementById('flash'), invite=document.getElementById('invite'),
+      ivid=document.getElementById('ivid');
+
+document.getElementById('cdLabel').textContent = CONFIG.countdownLabel;
+document.getElementById('btnMap').href  = CONFIG.mapsUrl;
+document.getElementById('btnRsvp').href = CONFIG.rsvpUrl;
+
+/* Videolar assets klasöründen yüklenir */
+try{ vid.src  = "assets/kutu-acilis.mp4"; vid.load(); }catch(e){}
+try{ ivid.src = "assets/davetiye.mp4";    ivid.load(); }catch(e){}
+
+let opened=false, revealing=false, safety=null;
+
+vid.addEventListener('loadeddata', ()=>{ try{const p=vid.play(); if(p&&p.then)p.then(()=>{vid.pause();vid.currentTime=0;}).catch(()=>{});}catch(e){} }, {once:true});
+
+function openBox(){
+  if(opened) return; opened=true; cover.classList.add('opening');
+  const showVideo=()=>{ vid.style.opacity='1'; setTimeout(()=>{cover.style.opacity='0';},260); };
+  try{ vid.currentTime=0; }catch(e){}
+  const p=vid.play();
+  vid.addEventListener('playing', ()=>requestAnimationFrame(showVideo), {once:true});
+  if(p&&p.then) p.then(()=>requestAnimationFrame(showVideo)).catch(showVideo);
+  setTimeout(showVideo,500);
+  const dur=(vid.duration&&isFinite(vid.duration))?vid.duration:7;
+  safety=setTimeout(finishReveal,(dur+1.2)*1000);
+}
+cover.addEventListener('click',openBox);
+cover.addEventListener('touchend',e=>{e.preventDefault();openBox();},{passive:false});
+
+vid.addEventListener('timeupdate',()=>{ if(vid.duration&&isFinite(vid.duration)&&vid.currentTime>=vid.duration-0.5) startReveal(); });
+vid.addEventListener('ended',finishReveal);
+
+function startReveal(){
+  if(revealing) return; revealing=true;
+  flash.style.opacity='0.5';
+  invite.style.opacity='1';
+  try{ ivid.currentTime=0; ivid.play(); }catch(e){}   // animasyonlu davetiye döngüde başlar
+}
+function finishReveal(){
+  startReveal();
+  if(safety){clearTimeout(safety);safety=null;}
+  vid.style.transition='opacity .7s ease'; vid.style.opacity='0';
+  setTimeout(()=>{flash.style.opacity='0';},150);
+  setTimeout(()=>{invite.classList.add('active');},200);
+  setTimeout(()=>{vid.style.display='none';flash.style.display='none';cover.style.display='none';},1100);
+}
+
+/* Canlı geri sayım */
+const elGun=document.getElementById('cdGun'), elSaat=document.getElementById('cdSaat'),
+      elDak=document.getElementById('cdDak'), elSan=document.getElementById('cdSan');
+const target=new Date(CONFIG.eventDate).getTime();
+const pad=n=>String(n).padStart(2,'0');
+function tick(){
+  let d=target-Date.now(); if(d<0)d=0; const s=Math.floor(d/1000);
+  elGun.textContent=pad(Math.floor(s/86400));
+  elSaat.textContent=pad(Math.floor((s%86400)/3600));
+  elDak.textContent=pad(Math.floor((s%3600)/60));
+  elSan.textContent=pad(s%60);
+}
+tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
