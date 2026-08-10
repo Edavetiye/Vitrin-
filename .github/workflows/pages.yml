@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'   # 6 saatte bir: yeni şablonları otomatik yakalar
 
 permissions:
   contents: read
@@ -21,8 +23,26 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
+      - name: Checkout (vitrin)
         uses: actions/checkout@v4
+
+      - name: Checkout şablonlar (Digitalcinizcom/main)
+        uses: actions/checkout@v4
+        with:
+          repository: Edavetiye/Digitalcinizcom
+          ref: main
+          path: _src
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: templates.json üret (şablonları senkronla)
+        run: node scripts/build-templates.mjs _src
+
+      - name: Yayın paketini temizle
+        run: rm -rf _src   # şablon kaynağı yayın paketine dahil edilmesin
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

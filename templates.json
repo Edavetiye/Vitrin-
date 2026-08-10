@@ -1,0 +1,54 @@
+{
+  "guncelleme": "2026-08-10T22:54:20.471Z",
+  "davetiyeler": [
+    {
+      "ad": "Bordo Dantel",
+      "tur": "Düğün",
+      "not": "Bordo dantel dokular, levha detayları, konum",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/dugun/bordo-dantel/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/dugun/bordo-dantel/assets/kapak.png"
+    },
+    {
+      "ad": "Taha & Melis",
+      "tur": "Düğün",
+      "not": "Canva tarzı zarif düzen, zarf açılışı, RSVP",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/dugun/canva-tarzi/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/dugun/canva-tarzi/assets/cover.webp"
+    },
+    {
+      "ad": "Asel, 4 Yaş — Peri Bahçesi",
+      "tur": "Doğum Günü",
+      "not": "Peri bahçesi teması, zarif geçişler",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/peri-bahcesi/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/peri-bahcesi/assets/kapak.webp"
+    },
+    {
+      "ad": "Prens mi? Prenses mi?",
+      "tur": "Doğum Günü",
+      "not": "Cinsiyet sürprizi, kabuk açılış animasyonu",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/prens-mi-prenses-mi/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/prens-mi-prenses-mi/assets/kapak.jpg"
+    },
+    {
+      "ad": "Prensesimiz Zeynep, 4 Yaş",
+      "tur": "Doğum Günü",
+      "not": "Hediye kutusu açılış animasyonu, geri sayım, konum ve RSVP",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/hediye-kutu-acilimi/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/hediye-kutu-acilimi/assets/kapak.png"
+    },
+    {
+      "ad": "Sevimli Hayvanlar",
+      "tur": "Doğum Günü",
+      "not": "Yağlı boya illüstrasyon, video arka plan",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/sevimli-hayvanlar-yagli-boya/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/dogum-gunu/sevimli-hayvanlar-yagli-boya/assets/kapak.jpg"
+    },
+    {
+      "ad": "Güzellik Merkezi — Büyük Açılış",
+      "tur": "Açılış",
+      "not": "Mağaza açılışı, konum ve davet",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/magaza-acilisi/guzellik-merkezi/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/magaza-acilisi/guzellik-merkezi/assets/kapak.jpg"
+    }
+  ]
+}

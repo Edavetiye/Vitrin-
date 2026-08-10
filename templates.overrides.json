@@ -1,0 +1,11 @@
+{
+  "_aciklama": "Şablonlara güzel isim/açıklama vermek için. Anahtar: 'kategori/klasor'. Boş bırakılan alanlar otomatik doldurulur (isim = sayfa başlığı, açıklama = boş). Yeni şablonlar buraya yazılmasa da vitrine otomatik eklenir; sadece ismini güzelleştirmek istersen buraya ekle. Bir şablonu vitrinde göstermemek için: \"gizli\": true.",
+  "dugun/adacayi-yesili":     { "gizli": true },
+  "dugun/canva-tarzi":        { "ad": "Taha & Melis",               "not": "Canva tarzı zarif düzen, zarf açılışı, RSVP" },
+  "dugun/bordo-dantel":       { "ad": "Bordo Dantel",               "not": "Bordo dantel dokular, levha detayları, konum" },
+  "dogum-gunu/hediye-kutu-acilimi":       { "ad": "Prensesimiz Zeynep, 4 Yaş", "not": "Hediye kutusu açılış animasyonu, geri sayım, konum ve RSVP" },
+  "dogum-gunu/peri-bahcesi":              { "ad": "Asel, 4 Yaş — Peri Bahçesi", "not": "Peri bahçesi teması, zarif geçişler" },
+  "dogum-gunu/sevimli-hayvanlar-yagli-boya": { "ad": "Sevimli Hayvanlar",      "not": "Yağlı boya illüstrasyon, video arka plan" },
+  "dogum-gunu/prens-mi-prenses-mi":       { "ad": "Prens mi? Prenses mi?",     "not": "Cinsiyet sürprizi, kabuk açılış animasyonu" },
+  "magaza-acilisi/guzellik-merkezi":      { "ad": "Güzellik Merkezi — Büyük Açılış", "not": "Mağaza açılışı, konum ve davet" }
+}
