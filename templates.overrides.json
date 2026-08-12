@@ -7,5 +7,6 @@
   "dogum-gunu/peri-bahcesi":              { "ad": "Asel, 4 Yaş — Peri Bahçesi", "not": "Peri bahçesi teması, zarif geçişler" },
   "dogum-gunu/sevimli-hayvanlar-yagli-boya": { "ad": "Sevimli Hayvanlar",      "not": "Yağlı boya illüstrasyon, video arka plan" },
   "dogum-gunu/prens-mi-prenses-mi":       { "ad": "Prens mi? Prenses mi?",     "not": "Cinsiyet sürprizi, kabuk açılış animasyonu" },
-  "magaza-acilisi/guzellik-merkezi":      { "ad": "Güzellik Merkezi — Büyük Açılış", "not": "Mağaza açılışı, konum ve davet" }
+  "magaza-acilisi/guzellik-merkezi":      { "ad": "Güzellik Merkezi — Büyük Açılış", "not": "Mağaza açılışı, konum ve davet" },
+  "magaza-acilisi/millenas":              { "ad": "Millenas Mağazası — Büyük Açılış", "not": "Zarif mağaza açılış daveti, konum, WhatsApp ve Instagram" }
 }

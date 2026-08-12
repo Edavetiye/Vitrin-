@@ -1,5 +1,5 @@
 {
-  "guncelleme": "2026-08-10T22:54:20.471Z",
+  "guncelleme": "2026-08-12T11:20:29.841Z",
   "davetiyeler": [
     {
       "ad": "Bordo Dantel",
@@ -49,6 +49,13 @@
       "not": "Mağaza açılışı, konum ve davet",
       "link": "https://edavetiye.github.io/Digitalcinizcom/magaza-acilisi/guzellik-merkezi/",
       "kapak": "https://edavetiye.github.io/Digitalcinizcom/magaza-acilisi/guzellik-merkezi/assets/kapak.jpg"
+    },
+    {
+      "ad": "Millenas Mağazası — Büyük Açılış",
+      "tur": "Açılış",
+      "not": "Zarif mağaza açılış daveti, konum, WhatsApp ve Instagram",
+      "link": "https://edavetiye.github.io/Digitalcinizcom/magaza-acilisi/millenas/",
+      "kapak": "https://edavetiye.github.io/Digitalcinizcom/magaza-acilisi/millenas/assets/kapak.jpg"
     }
   ]
 }
