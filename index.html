@@ -261,6 +261,12 @@ const YEDEK = [
   { ad:"Güzellik Merkezi — Büyük Açılış", tur:"Açılış", not:"Mağaza açılışı, konum ve davet", link:BASE+"/magaza-acilisi/guzellik-merkezi/", kapak:BASE+"/magaza-acilisi/guzellik-merkezi/assets/kapak.jpg" }
 ];
 
+// Elle eklenen davetiyeler — bu vitrinde barınan, otomatik senkron dışındaki örnekler.
+// Otomatik listeyle birleştirilir; Digitalcinizcom'a taşınırsa buradan silinebilir.
+const EK = [
+  { ad:"Millenas Mağazası — Büyük Açılış", tur:"Açılış", not:"Mağaza açılış daveti, konum, WhatsApp ve Instagram", link:"davetiye/millenas-magazasi/", kapak:"davetiye/millenas-magazasi/kapak.jpg" }
+];
+
 /* ============================================================
    Buradan aşağısı otomatik çalışır
    ============================================================ */
@@ -350,10 +356,10 @@ function sec(tur, btn) {
 fetch("templates.json", { cache: "no-store" })
   .then(r => r.ok ? r.json() : null)
   .then(j => {
-    const liste = (j && Array.isArray(j.davetiyeler) && j.davetiyeler.length) ? j.davetiyeler : YEDEK;
-    render(liste);
+    const temel = (j && Array.isArray(j.davetiyeler) && j.davetiyeler.length) ? j.davetiyeler : YEDEK;
+    render([...temel, ...EK]);
   })
-  .catch(() => render(YEDEK));
+  .catch(() => render([...YEDEK, ...EK]));
 </script>
 </body>
 </html>
